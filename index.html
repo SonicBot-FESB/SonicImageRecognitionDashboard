@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>NeutralinoJs sample app</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="./src/main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body class="bg-light" style="height: 100vh">
+
+    <nav class="navbar bg-white border-bottom shadow-sm" style="z-index: 100">
+      <div class="container-fluid row">
+        <div class="col-8">
+          <button class="btn btn-outline-success btn-sm" id="start-btn">
+            <i class="bi bi-play-fill"></i>
+          </button>
+          <button class="btn btn-outline-danger btn-sm ms-2" id="stop-btn">
+            <i class="bi bi-stop-fill"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-primary ms-2" id="connect-btn">
+            <i class="bi bi-plug-fill"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-secondary ms-2" id="refresh-btn">
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
+        </div>
+        <div class="col-2 input-group-sm">
+          <input type="text" class="form-control" id="hostname" value="127.0.0.1">
+        </div>
+        <div class="col-1 input-group-sm">
+          <input type="number" class="form-control" id="port" value="3001">
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3 position-fixed h-100 border-end shadow" style="overflow: scroll; padding-bottom: 80px; z-index: 10;">
+
+
+          <!-- Rezolution -->
+          <div class="card mt-4">
+            <div class="card-header">
+              Rezolution
+            </div>
+            <div class="card-body">
+              <label for="rezolution" class="form-label">Rezolution</label>
+              <select class="form-select" id="rezolution-input">
+                <option value="" selected>Open this select menu</option>
+                <option value="1080p">1080p</option>
+                <option value="720p">720p</option>
+                <option value="480p">480p</option>
+                <option value="240p">240p</option>
+              </select>
+              <button class="btn btn-secondary mt-4" id="rezolution-apply">Apply</button>
+            </div>  
+          </div>
+
+          <!-- Vertical crop -->
+          <div class="card mt-4">
+            <div class="card-header">
+              Vertical crop 
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <label for="vertical-crop-top" class="form-label">Top</label>
+                  <input type="number" class="form-control" id="vertical-crop-top-input">
+                </div>
+                <div class="col">
+                  <label for="vertical-crop-top" class="form-label">Bottom</label>
+                  <input type="number" class="form-control" id="vertical-crop-bottom-input">
+                </div>
+              </div>
+              <button class="btn btn-secondary mt-4" id="vertical-crop-apply">Apply</button>
+            </div>  
+          </div>
+
+          <!-- Horizontal crop -->
+          <div class="card mt-4">
+            <div class="card-header">
+              Horizontal crop 
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <label for="horizontal-crop-top" class="form-label">Left</label>
+                  <input type="number" class="form-control" id="horizontal-crop-left-input">
+                </div>
+                <div class="col">
+                  <label for="horizontal-crop-top" class="form-label">Right</label>
+                  <input type="number" class="form-control" id="horizontal-crop-right-input">
+                </div>
+              </div>
+              <button class="btn btn-secondary mt-4" id="horizontal-crop-apply">Apply</button>
+            </div>  
+          </div>
+
+          <!-- Grayscale filter -->
+          <div class="card mt-4">
+            <div class="card-header">
+              Grayscale filter
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <label for="grayscale-bottom" class="form-label">Bottom threshold</label>
+                  <input type="number" class="form-control" id="grayscale-bottom-input">
+                </div>
+                <div class="col">
+                  <label for="grayscale-top" class="form-label">Top threshold</label>
+                  <input type="number" class="form-control" id="grayscale-top-input">
+                </div>
+              </div>
+              <button class="btn btn-secondary mt-4" id="grayscale-apply">Apply</button>
+            </div>  
+          </div>
+
+          <!-- White threshold -->
+          <div class="card mt-4">
+            <div class="card-header">
+              White threshold
+            </div>
+            <div class="card-body">
+              <label for="white-threshold" class="form-label">Threshold (%)</label>
+              <input type="number" class="form-control" id="white-threshold-input">
+              <button class="btn btn-secondary mt-4" id="white-threshold-apply">Apply</button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Output -->
+        <div class="col-6 position-fixed bg-white h-100 border-end p-4" id="logs-display" style="overflow: scroll; padding-bottom: 80px; left: 25%">
+        </div>
+
+        <div class="col-3 position-fixed bg-light h-100 border-end shadow" style="overflow: scroll; padding-bottom: 80px; left: 75%; z-index: 10;">
+          <!-- Image -->
+          <div class="card mt-4">
+            <div class="card-header">
+              Image
+            </div>
+            <img src="https://picsum.photos/500/200" class="card-img-top" id="img-preview">
+            <div class="card-body">
+              <button class="btn btn-secondary" id="get-image-btn">Capture</button>
+            </div>
+          </div>
+
+          <!-- Character -->
+          <div class="card mt-4">
+            <div class="card-header">
+              Character
+            </div>
+            <div class="card-body">
+              <div class="mb-4 mt-2 d-flex" style="align-items: center">
+                <span class="display-1 fw-bold bg-primary pt-2 pb-2 ps-4 pe-4 rounded text-light" id="predicted-char">U</span>
+                <span class="display-5 text-right w-100 text-end fw-bold" id="prediction-chance">95%</span>
+              </div>
+              <button class="mt-2 btn btn-secondary btn-inline" id="get-prediction-btn">Predict</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
